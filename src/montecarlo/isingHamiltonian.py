@@ -2,15 +2,25 @@ import numpy as np
 from . import bitstring as BitString
 
 class IsingHamiltonian:
+    """
+    Class for representing a Hamiltonian from a graph
+    """
     def __init__(self, G):
         self.graph = G
         self.mues = np.zeros(len(G))
+        self.N = len(G)
         self.J = []
         # self.J = list(nx.get_edge_attributes(G, 'weight').values())
         for u, v, w in G.edges.data('weight'):
             self.J.append(w)  
 
     def energy(self, config:BitString):
+        """
+        Gets the energy of the Hamiltonian corresponding to the BitString configuration for the spins
+        (Args):
+            BitString -> bit string representing the spins of each vertex of the graph
+        Returns the total energy from the bit string configuration
+        """
         sum = 0.0
         for u, v, w in self.graph.edges(data = 'weight'):
             if int(repr(config)[u]) == 0 and int(repr(config)[v]) == 0:
@@ -29,13 +39,24 @@ class IsingHamiltonian:
         return sum
     
     def magnetism(self, config:BitString):
+        """
+        Returns the magentism of the Hamiltonian of the given bit string configuration 
+        """
         return config.on() - config.off()
     
     def set_mu(self, mus: np.array):
+        """
+        Congifures the mues of the Hamiltonian
+        """
         self.mues = mus
         return self
 
     def compute_average_values(self, T: int):
+        """
+        Gets the average values of energy, magnetization, heat capacity and magnetic susceptibility
+        (Args):
+            T -> temperature in Kelvin
+        """
         B = 1 / T
         E  = 0.0
         M  = 0.0
@@ -63,6 +84,3 @@ class IsingHamiltonian:
         MS = (MM - M**2) * (T**(-1))
 
         return E, M, HC, MS
-    
-    def getGraph(self):
-        return self.graph
