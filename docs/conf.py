@@ -13,8 +13,6 @@ author = 'Zachary LaCava'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser',]
-
 source_suffix = {
 '.rst': 'restructuredtext',
 '.md': 'markdown',
@@ -41,6 +39,7 @@ extensions = [
 'sphinx.ext.autosummary',
 'myst_parser',
 ]
+
 autosummary_generate = True
 autodoc_default_options = {
 'members': True,

@@ -19,7 +19,7 @@ class IsingHamiltonian:
         for u, v, w in G.edges.data('weight'):
             self.J.append(w)  
 
-    def energy(self, config:BitString):
+    def energy(self, config:BitString.BitString):
         """
         Gets the energy of the Hamiltonian corresponding to the BitString configuration for the spins
         (Args):
@@ -43,7 +43,7 @@ class IsingHamiltonian:
        
         return sum
     
-    def magnetism(self, config:BitString):
+    def magnetism(self, config:BitString.BitString):
         """
         Returns the magentism of the Hamiltonian of the given bit string configuration 
         """
